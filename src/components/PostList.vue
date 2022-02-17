@@ -1,5 +1,10 @@
 <template>
-	<PostItem v-for="post in posts" :key="post.id" :post="post" />
+	<PostItem
+		v-for="post in posts"
+		:key="post.id"
+		:post="post"
+		@remove="this.$emit('remove', post)"
+	/>
 </template>
 
 <script>
