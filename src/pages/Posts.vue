@@ -1,14 +1,14 @@
 <template>
 	<h1>Страница с постами</h1>
 	<div class="controls">
-		<Input v-model="searchQuery" placeholder="Поиск..."></Input>
+		<Input v-model="searchQuery" v-focus placeholder="Поиск..."></Input>
 		<div class="buttons">
 			<Button @click="showDialog">Создать пост</Button>
 			<Select v-model="selectedSort" :options="sortOptios"></Select>
 		</div>
 	</div>
 	<PostList v-if="!isPostLoading" :posts="searchedPosts" @remove="removePost" />
-	<div ref="observer" class="observer"></div>
+	<div v-intersection="loadingMorePosts" class="observer"></div>
 	<!-- <div class="pages">
 			<div
 				v-for="pageNumber in totalPages"
@@ -54,20 +54,6 @@ export default {
 
 	mounted() {
 		this.fetchPosts();
-
-		const options = {
-			rootMargin: '8px',
-			threshold: 1.0,
-		};
-
-		const cb = (entries, observer) => {
-			if (entries[0].isIntersecting && this.page <= this.totalPages) {
-				this.loadingMorePosts();
-			}
-		};
-
-		const observer = new IntersectionObserver(cb, options);
-		observer.observe(this.$refs.observer);
 	},
 
 	methods: {
@@ -127,11 +113,6 @@ export default {
 				alert('Ошибка');
 			}
 		},
-
-		// changePage(pageNumber) {
-		// 	this.page = pageNumber;
-		// 	this.fetchPosts();
-		// },
 	},
 
 	computed: {
