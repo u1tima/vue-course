@@ -1,8 +1,11 @@
 <template>
 	<div class="app">
 		<h1>Страница с постами</h1>
-		<Button @click="showDialog">Создать пост</Button>
-		<PostList v-if="!isPostLoading" :posts="posts" @remove="removePost" />
+		<div class="app-controls">
+			<Button @click="showDialog">Создать пост</Button>
+			<Select v-model="selectedSort" :options="sortOptios"></Select>
+		</div>
+		<PostList v-if="!isPostLoading" :posts="sortedPosts" @remove="removePost" />
 		<div v-else>Идёт загрузка</div>
 		<Dialog v-model:show="dialogVisible">
 			<PostForm @create="createPost" />
@@ -26,6 +29,11 @@ export default {
 			posts: [],
 			dialogVisible: false,
 			isPostLoading: false,
+			selectedSort: '',
+			sortOptios: [
+				{ value: 'title', name: 'По названию' },
+				{ value: 'body', name: 'По содержанию' },
+			],
 		};
 	},
 
@@ -55,9 +63,18 @@ export default {
 				);
 				this.posts = response.data;
 			} catch (error) {
+				alert('Ошибка');
 			} finally {
 				this.isPostLoading = false;
 			}
+		},
+	},
+
+	computed: {
+		sortedPosts() {
+			return [...this.posts].sort((a, b) =>
+				a[this.selectedSort]?.localeCompare(b[this.selectedSort]),
+			);
 		},
 	},
 };
@@ -72,5 +89,10 @@ export default {
 
 .app {
 	padding: 20px;
+}
+
+.app-controls {
+	display: flex;
+	justify-content: space-between;
 }
 </style>

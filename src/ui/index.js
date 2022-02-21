@@ -1,5 +1,6 @@
-import Button from './Button.vue';
-import Dialog from './Dialog.vue';
-import Input from './Input.vue';
+import Button from './Button';
+import Dialog from './Dialog';
+import Select from './Select';
+import Input from './Input';
 
-export default [Button, Input, Dialog];
+export default [Button, Input, Dialog, Select];
