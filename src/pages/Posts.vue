@@ -9,16 +9,6 @@
 	</div>
 	<PostList v-if="!isPostLoading" :posts="searchedPosts" @remove="removePost" />
 	<div v-intersection="loadingMorePosts" class="observer"></div>
-	<!-- <div class="pages">
-			<div
-				v-for="pageNumber in totalPages"
-				:key="pageNumber"
-				:class="['page', { 'current-page': pageNumber === page }]"
-				@click="changePage(pageNumber)"
-			>
-				{{ pageNumber }}
-			</div>
-		</div> -->
 	<Dialog v-model:show="dialogVisible">
 		<PostForm @create="createPost" />
 	</Dialog>
