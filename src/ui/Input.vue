@@ -1,5 +1,5 @@
 <template>
-	<input type="text" class="input" :value="value" @input="updateInput" />
+	<input type="text" class="input" v-model="modelValue" @input="updateInput" />
 </template>
 
 <script>
@@ -7,12 +7,12 @@ export default {
 	name: 'Input',
 
 	props: {
-		value: { type: [String, Number], default: '' },
+		modelValue: { type: [String, Number], default: '' },
 	},
 
 	methods: {
 		updateInput(ev) {
-			this.$emit('update:value', ev.target.value);
+			this.$emit('update:modelValue', ev.target.value);
 		},
 	},
 };
