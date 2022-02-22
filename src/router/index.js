@@ -4,6 +4,7 @@ import About from '@/pages/About';
 import Posts from '@/pages/Posts';
 import Post from '@/pages/Post';
 import PostsWithStore from '@/pages/PostsWithStore';
+import PostsCompositionAPI from '@/pages/PostsCompositionAPI';
 
 const routes = [
 	{ path: '/', component: Main },
@@ -11,6 +12,7 @@ const routes = [
 	{ path: '/posts', component: Posts },
 	{ path: '/posts/:id', component: Post },
 	{ path: '/store', component: PostsWithStore },
+	{ path: '/composition', component: PostsCompositionAPI },
 ];
 
 export default createRouter({

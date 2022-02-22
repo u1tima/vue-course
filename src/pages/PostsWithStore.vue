@@ -1,6 +1,4 @@
 <template>
-	<h1>{{ $store.state.post.limit }}</h1>
-
 	<h1>Страница с постами</h1>
 	<div class="controls">
 		<Input
